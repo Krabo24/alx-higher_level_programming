@@ -4,19 +4,18 @@
 #include <stdlib.h>
 
 /**
- * struct listint_s - the singly linked list
+ * struct listint_s - singly linked list
  * @n: integer
- * @next: point to next node
- * Description: singly linked list node structure holberton project
+ * @next: points to the next node
+ *
+ * Description: singly linked list node structure
+ * for Holberton project
  */
-
 typedef struct listint_s
-
 {
 	int n;
 	struct listint_s *next;
-	listint_t;
-}
+} listint_t;
 
 size_t print_listint(const listint_t *h);
 listint_t *add_nodeint(listint_t **head, const int n);
