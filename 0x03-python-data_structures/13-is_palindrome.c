@@ -1,74 +1,86 @@
+#include <stdlib.h>
+#include <stdio.h>
 #include "lists.h"
 
-int is_palindrome(listint_t **head);
-listint_t *reverse_listint(listint_t **head);
-
 /**
- * reverse_listint - reverse singly linked listint_t list
- * @head: pointer to starting node of list to reverse
- * Return: pointer to head of reversed list
- */
-
-listint_t *reverse_listint(listint_t **head)
-
-{
-	listint_t *node = *head, *next, *prev = NULL;
-
-	while (node)
-	{
-		next = node->next;
-		node->next = prev;
-		prev = node;
-		node = next;
-	}
-
-	*head = prev;
-	return (*head);
-}
-
-/**
- * is_palindrome - check if singly linked list is palindrome
- * @head: pointer to head of linked list
- * Return: If linked list is not  palindrome - 0 if list
- * list is a palindrome - 1.
- */
+  * is_palindrome - check if singly linked list is  palindrome
+  * @head: The head of the singly linked list
+  * Return: 0 if not a palindrome, and 1 if not a palindrome
+  */
 
 int is_palindrome(listint_t **head)
 
 {
-	listint_t *tmp, *rev, *mid;
-	size_t size = 0, i;
+    listint_t *start = NULL, *end = NULL;
+    unsigned int i = 0, len = 0, len_cyc = 0, len_list = 0;
 
-	if (*head == NULL || (*head)->next == NULL)
-		return (1);
+    if (head == NULL)
+        return (0);
 
-	tmp = *head;
-	while (tmp)
+    if (*head == NULL)
+        return (1);
+    
+    start = *head;
+    len = listint_len(start);
+    len_cyc = len * 2;
+    len_list = len_cyc - 2;
+    end = *head;
+
+    for (; i < len_cyc; i = i + 2)
+    {
+        if (start[i].n != end[len_list].n)
+            return (0);
+
+        len_list = len_list - 2;
+    }
+
+    return (1);
+}
+
+/**
+  * get_nodeint_at_index - get node from linked list
+  * @head: head of linked list
+  * @index: index to find in linked list
+  * Return: specific node of linked list
+  */
+
+listint_t *get_nodeint_at_index(listint_t *head, unsigned int index)
+
+{
+	listint_t *current = head;
+	unsigned int iter_times = 0;
+
+	if (head)
 	{
-		size++;
-		tmp = tmp->next;
+		while (current != NULL)
+		{
+			if (iter_times == index)
+				return (current);
+
+			current = current->next;
+			++iter_times;
+		}
 	}
 
-	tmp = *head;
-	for (i = 0; i < (size / 2) - 1; i++)
-		tmp = tmp->next;
+	return (NULL);
+}
 
-	if ((size % 2) == 0 && tmp->n != tmp->next->n)
-		return (0);
+/**
+  * slistint_len - count number of elements in  linked list
+  * @h: linked list to count
+  * Return: number of elements in linked list
+  */
 
-	tmp = tmp->next->next;
-	rev = reverse_listint(&tmp);
-	mid = rev;
+size_t listint_len(const listint_t *h)
 
-	tmp = *head;
-	while (rev)
+{
+	int lenght = 0;
+
+	while (h != NULL)
 	{
-		if (tmp->n != rev->n)
-			return (0);
-		tmp = tmp->next;
-		rev = rev->next;
+		++lenght;
+		h = h->next;
 	}
-	reverse_listint(&mid);
 
-	return (1);
+	return (lenght);
 }
