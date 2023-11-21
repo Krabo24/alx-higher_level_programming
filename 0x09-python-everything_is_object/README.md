@@ -7,3 +7,7 @@ Write the name of the function in the file, without ().
 In the following code, do a and b point to the same object? Answer with Yes or No.
 In the following code, do a and b point to the same object? Answer with Yes or No.
 In the following code, do a and b point to the same object? Answer with Yes or No.
+Write the name of the function in the file, without ().
+What do these 3 lines print?
+13. And with a list, is it really the same
+14. List append
