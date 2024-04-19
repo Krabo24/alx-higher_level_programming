@@ -18,3 +18,4 @@ Mandatory
 Advanced Tasks
 14- Write a function that inserts a line of text to a file, after each line containing a specific string (see example):
 15- Write a script that reads stdin line by line and computes metrics:
+The end
